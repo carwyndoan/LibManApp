@@ -131,7 +131,11 @@ public class LibraryMemberOverview {
 				if (controller.deleteLibraryMember(tblLibraryMember.getItems().get(selectedIndex)))
 					tblLibraryMember.getItems().remove(selectedIndex);
 				else {
-
+					alert.setAlertType(AlertType.ERROR);
+					alert.setTitle("No Selection");
+					alert.setHeaderText("No Library Member Selected");
+					alert.setContentText("Please select a Member in the table.");
+					alert.showAndWait();
 				}
 			}
 
