@@ -13,12 +13,17 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import lib.man.model.Book;
 import lib.man.model.LibraryMember;
+<<<<<<< HEAD
 import lib.man.view.BookEditDialogController;
 import lib.man.view.BookOverviewController;
 import lib.man.view.LibraryMemberEditDialogController;
 import lib.man.view.LibraryMemberOverviewController;
 import lib.man.view.LoginDialogController;
 import lib.man.view.RootLayoutController;
+=======
+import lib.man.view.LibraryMemberEditDialog;
+import lib.man.view.LibraryMemberOverview;
+>>>>>>> branch 'master' of https://github.com/carwyndoan/LibManApp.git
 
 public class MainApp extends Application {
 
@@ -41,10 +46,15 @@ public class MainApp extends Application {
     }
     
 // Begin ---- Using for LibraryMember    
+<<<<<<< HEAD
     private ObservableList<LibraryMember> listLibrabryMember = FXCollections.observableArrayList();
     private ObservableList<Book> listBook = FXCollections.observableArrayList();
     
+=======
+    //private ObservableList<LibraryMember> listLibrabryMember = FXCollections.observableArrayList();
+>>>>>>> branch 'master' of https://github.com/carwyndoan/LibManApp.git
     public MainApp() {
+<<<<<<< HEAD
     	// Add some sample data
     	for (int i = 1; i <= 10; i++)
     	{
@@ -64,9 +74,19 @@ public class MainApp extends Application {
     		int 	maxCheckout = i + 5;    		
     		listBook.add(new Book(strIsbn, strAuthor, strTitle, maxCheckout));
     	}
+=======
+		/*
+		 * // Add some sample data for (int i = 1; i <= 10; i++) { String strID =
+		 * String.format("%05d", i); String strFName = String.format("FName %d", i);
+		 * String strLName = String.format("Last Name %d", i); String strPhone =
+		 * String.format("%010d", i); listLibrabryMember.add(new LibraryMember(strID,
+		 * strFName, strLName, strPhone)); }
+		 */
+>>>>>>> branch 'master' of https://github.com/carwyndoan/LibManApp.git
     }
     
     // Returns the data as an observable list of LibraryMembers. 
+<<<<<<< HEAD
 	public ObservableList<LibraryMember> getLirabryMembers() {
 		return listLibrabryMember;
 	}	
@@ -74,6 +94,12 @@ public class MainApp extends Application {
 	public ObservableList<Book> getBooks() {
 		return listBook;
 	}
+=======
+	/*
+	 * public ObservableList<LibraryMember> getLirabryMembers() { return
+	 * listLibrabryMember; }
+	 */
+>>>>>>> branch 'master' of https://github.com/carwyndoan/LibManApp.git
 // End ---- Using for LibraryMember    	
 	
 
@@ -128,7 +154,7 @@ public class MainApp extends Application {
             rootLayout.setCenter(personOverview);
 
             // Give the controller access to the main app.
-            LibraryMemberOverviewController controller = loader.getController();
+            LibraryMemberOverview controller = loader.getController();
             controller.setMainApp(this);
 
         } catch (IOException e) {
@@ -212,7 +238,7 @@ public class MainApp extends Application {
             dialogStage.setScene(scene);
 
             // Set the person into the controller.
-            LibraryMemberEditDialogController controller = loader.getController();
+            LibraryMemberEditDialog controller = loader.getController();
             controller.setDialogStage(dialogStage);
             controller.setLibraryMember(libraryMember);
 

@@ -4,10 +4,11 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import lib.man.controller.SystemController;
 import lib.man.model.LibraryMember;
 
 
-public class LibraryMemberEditDialogController {
+public class LibraryMemberEditDialog {
 
     @FXML
     private TextField txtMemberID;
@@ -21,13 +22,14 @@ public class LibraryMemberEditDialogController {
     private Stage dialogStage;
     private LibraryMember libraryMember;
     private boolean okClicked = false;
-
+    private SystemController controller;
     /**
      * Initializes the controller class. This method is automatically called
      * after the fxml file has been loaded.
      */
     @FXML
     private void initialize() {
+    	this.controller = new SystemController();
     }
 
     /**
@@ -47,7 +49,7 @@ public class LibraryMemberEditDialogController {
     public void setLibraryMember(LibraryMember libraryMember) {
         this.libraryMember = libraryMember;
 
-        txtMemberID.setText(libraryMember.getMemberID());
+        txtMemberID.setText(String.valueOf(libraryMember.getMemberId()));
         txtFirstName.setText(libraryMember.getFirstName());
         txtLastName.setText(libraryMember.getLastName());
         txtPhone.setText(libraryMember.getPhone());
@@ -68,12 +70,19 @@ public class LibraryMemberEditDialogController {
     @FXML
     private void handleOk() {
         if (isInputValid()) {
-            libraryMember.setMemberID(txtMemberID.getText());
+        	if(txtMemberID.getText() != "")
+        		libraryMember.setMemberId(Long.valueOf(txtMemberID.getText()));
             libraryMember.setFirstName(txtFirstName.getText());
             libraryMember.setLastName(txtLastName.getText());
             libraryMember.setPhone(txtPhone.getText());
-
-            okClicked = true;
+            if(txtMemberID.getText() != "")
+            	okClicked = controller.updateLibraryMember(libraryMember);
+            else {
+            	long memberId = controller.addNewLibraryMember(libraryMember);
+            	if(memberId > 0)
+            		libraryMember.setMemberId(memberId);
+            	okClicked = memberId > 0;
+            }
             dialogStage.close();
         }
     }
