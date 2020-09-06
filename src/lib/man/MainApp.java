@@ -12,8 +12,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import lib.man.model.LibraryMember;
-import lib.man.view.LibraryMemberEditDialogController;
-import lib.man.view.LibraryMemberOverviewController;
+import lib.man.view.LibraryMemberEditDialog;
+import lib.man.view.LibraryMemberOverview;
 
 public class MainApp extends Application {
 
@@ -21,22 +21,21 @@ public class MainApp extends Application {
     private BorderPane rootLayout;
     
 // Begin ---- Using for LibraryMember    
-    private ObservableList<LibraryMember> listLibrabryMember = FXCollections.observableArrayList();
+    //private ObservableList<LibraryMember> listLibrabryMember = FXCollections.observableArrayList();
     public MainApp() {
-    	// Add some sample data
-    	for (int i = 1; i <= 10; i++)
-    	{
-    		String strID 	= String.format("%05d", i);
-    		String strFName = String.format("FName %d", i);
-    		String strLName = String.format("Last Name %d", i);
-    		String strPhone = String.format("%010d", i);    		
-    		listLibrabryMember.add(new LibraryMember(strID, strFName, strLName, strPhone));
-    	}
+		/*
+		 * // Add some sample data for (int i = 1; i <= 10; i++) { String strID =
+		 * String.format("%05d", i); String strFName = String.format("FName %d", i);
+		 * String strLName = String.format("Last Name %d", i); String strPhone =
+		 * String.format("%010d", i); listLibrabryMember.add(new LibraryMember(strID,
+		 * strFName, strLName, strPhone)); }
+		 */
     }
     // Returns the data as an observable list of LibraryMembers. 
-	public ObservableList<LibraryMember> getLirabryMembers() {
-		return listLibrabryMember;
-	}
+	/*
+	 * public ObservableList<LibraryMember> getLirabryMembers() { return
+	 * listLibrabryMember; }
+	 */
 // End ---- Using for LibraryMember    	
 	
     @Override
@@ -79,7 +78,7 @@ public class MainApp extends Application {
             rootLayout.setCenter(personOverview);
 
             // Give the controller access to the main app.
-            LibraryMemberOverviewController controller = loader.getController();
+            LibraryMemberOverview controller = loader.getController();
             controller.setMainApp(this);
 
         } catch (IOException e) {
@@ -123,7 +122,7 @@ public class MainApp extends Application {
             dialogStage.setScene(scene);
 
             // Set the person into the controller.
-            LibraryMemberEditDialogController controller = loader.getController();
+            LibraryMemberEditDialog controller = loader.getController();
             controller.setDialogStage(dialogStage);
             controller.setLibraryMember(libraryMember);
 

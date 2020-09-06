@@ -100,7 +100,7 @@ public class LibraryMemberOverview {
 	private void showLibraryMemberDetails(LibraryMember member) {
 		if (member != null) {
 			// Fill the labels with info from the person object.
-			labelMemberID.setText(member.getMemberID());
+			labelMemberID.setText(String.valueOf(member.getMemberId()));
 			labelFirstName.setText(member.getFirstName());
 			labelLastName.setText(member.getLastName());
 			labelPhone.setText(member.getPhone());
