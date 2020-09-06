@@ -156,7 +156,27 @@ public class MainApp extends Application {
         }
     }
     
-	/**
+    // Shows the LibraryMember overview inside the root layout.
+    public void showCheckoutBook() {
+        try {
+            // Load person overview.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("view/CheckoutBook.fxml"));
+            AnchorPane checkoutBook = (AnchorPane) loader.load();
+            
+            // Set person overview into the center of root layout.
+            rootLayout.setCenter(checkoutBook);
+
+            // Give the controller access to the main app.
+            // CheckoutBookController checkoutBook = loader.getController();
+            // checkoutBook.setMainApp(this);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
 	 * Returns the main stage.
 	 * @return
 	 */

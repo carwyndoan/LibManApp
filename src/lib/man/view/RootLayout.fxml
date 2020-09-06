@@ -19,7 +19,7 @@
           </Menu>
           <Menu fx:id="mnuLibrarian" disable="true" mnemonicParsing="false" text="Librarian">
             <items>
-              <MenuItem mnemonicParsing="false" text="Check out Book" />
+              <MenuItem mnemonicParsing="false" onAction="#handleLibCheckoutBook" text="Check out Book" />
             </items>
           </Menu>
           <Menu fx:id="mnuAdmin" disable="true" mnemonicParsing="false" text="Admin">

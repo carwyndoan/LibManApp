@@ -42,6 +42,11 @@ public class RootLayoutController {
 
     	alert.showAndWait();
     }    
+    // Handle Lib Check out Book.
+    @FXML
+    private void handleLibCheckoutBook() {
+    	mainApp.showCheckoutBook();
+    }
     // Handle Member Man.
     @FXML
     private void handleAdminMemberManagement() {
