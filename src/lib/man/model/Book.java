@@ -7,6 +7,7 @@ import java.util.List;
 public class Book implements Serializable{
 
 	private static final long serialVersionUID = -284993669099407157L;
+	public static final String STORAGE_TYPE = "BOOK";
 	private String isbn;
 	private String title;
 	private List<BookCopy> copies = new ArrayList<BookCopy>();
