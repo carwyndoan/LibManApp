@@ -3,6 +3,7 @@ package lib.man.dataaccess;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 import lib.man.model.Book;
 import lib.man.model.CheckoutRecord;
@@ -47,15 +48,16 @@ public class DataAccessFacade implements DataAccess {
 	}
 
 	@Override
-	public void addNewLibraryMember(LibraryMember libraryMember) {
+	public long addNewLibraryMember(LibraryMember libraryMember) {
 		// TODO Auto-generated method stub
-		
+		Random rand = new Random(1);
+		return rand.nextLong();
 	}
 
 	@Override
-	public void updateLibraryMember(LibraryMember libraryMember) {
+	public boolean updateLibraryMember(LibraryMember libraryMember) {
 		// TODO Auto-generated method stub
-		
+		return true;
 	}
 
 	@Override

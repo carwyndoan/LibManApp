@@ -17,9 +17,9 @@ public interface DataAccess {
 	public Collection<Book> getAllBooks();
 	  
 	//LibraryMember function
-	public void addNewLibraryMember(LibraryMember libraryMember);
+	public long addNewLibraryMember(LibraryMember libraryMember);
 
-	public void updateLibraryMember(LibraryMember libraryMember);
+	public boolean updateLibraryMember(LibraryMember libraryMember);
 
 	public LibraryMember findLibraryMemberById(String id);
 
