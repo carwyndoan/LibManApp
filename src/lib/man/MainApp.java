@@ -11,18 +11,70 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import lib.man.model.Book;
 import lib.man.model.LibraryMember;
+<<<<<<< HEAD
+import lib.man.view.BookEditDialogController;
+import lib.man.view.BookOverviewController;
+import lib.man.view.LibraryMemberEditDialogController;
+import lib.man.view.LibraryMemberOverviewController;
+import lib.man.view.LoginDialogController;
+import lib.man.view.RootLayoutController;
+=======
 import lib.man.view.LibraryMemberEditDialog;
 import lib.man.view.LibraryMemberOverview;
+>>>>>>> branch 'master' of https://github.com/carwyndoan/LibManApp.git
 
 public class MainApp extends Application {
 
     private Stage primaryStage;
     private BorderPane rootLayout;
     
+    private int systemRoles = 0;
+    private RootLayoutController rootController = null;
+
+    // System Roles
+    public void setSystemRoles(int systemRoles) {
+    	this.systemRoles = systemRoles;
+    }
+    public int getSystemRoles() {
+    	return systemRoles;
+    }
+    // Root Controller
+    public RootLayoutController getRootController() {
+    	return rootController;
+    }
+    
 // Begin ---- Using for LibraryMember    
+<<<<<<< HEAD
+    private ObservableList<LibraryMember> listLibrabryMember = FXCollections.observableArrayList();
+    private ObservableList<Book> listBook = FXCollections.observableArrayList();
+    
+=======
     //private ObservableList<LibraryMember> listLibrabryMember = FXCollections.observableArrayList();
+>>>>>>> branch 'master' of https://github.com/carwyndoan/LibManApp.git
     public MainApp() {
+<<<<<<< HEAD
+    	// Add some sample data
+    	for (int i = 1; i <= 10; i++)
+    	{
+    		String strID 	= String.format("%05d", i);
+    		String strFName = String.format("FName %d", i);
+    		String strLName = String.format("Last Name %d", i);
+    		String strPhone = String.format("%010d", i);    		
+    		listLibrabryMember.add(new LibraryMember(strID, strFName, strLName, strPhone));
+    	}
+
+    	// Book Add some sample data
+    	for (int i = 1; i <= 10; i++)
+    	{
+    		String strIsbn 	= String.format("%010d", i);
+    		String strAuthor = String.format("Author %d", i);
+    		String strTitle = String.format("Title %d", i);
+    		int 	maxCheckout = i + 5;    		
+    		listBook.add(new Book(strIsbn, strAuthor, strTitle, maxCheckout));
+    	}
+=======
 		/*
 		 * // Add some sample data for (int i = 1; i <= 10; i++) { String strID =
 		 * String.format("%05d", i); String strFName = String.format("FName %d", i);
@@ -30,21 +82,39 @@ public class MainApp extends Application {
 		 * String.format("%010d", i); listLibrabryMember.add(new LibraryMember(strID,
 		 * strFName, strLName, strPhone)); }
 		 */
+>>>>>>> branch 'master' of https://github.com/carwyndoan/LibManApp.git
     }
+    
     // Returns the data as an observable list of LibraryMembers. 
+<<<<<<< HEAD
+	public ObservableList<LibraryMember> getLirabryMembers() {
+		return listLibrabryMember;
+	}	
+	// Returns the data as an observable list of LibraryMembers. 
+	public ObservableList<Book> getBooks() {
+		return listBook;
+	}
+=======
 	/*
 	 * public ObservableList<LibraryMember> getLirabryMembers() { return
 	 * listLibrabryMember; }
 	 */
+>>>>>>> branch 'master' of https://github.com/carwyndoan/LibManApp.git
 // End ---- Using for LibraryMember    	
 	
-    @Override
+
+	@Override
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("Library Management Application");
 
         initRootLayout();
-        showLibraryMemberOverview();
+        // Show Login Dlg
+        if (showLoginDialog() == true)
+    	{
+        	// Load Roles
+        	rootController.LoadSystemRoles(systemRoles);
+    	}
     }
     
     /**
@@ -60,12 +130,18 @@ public class MainApp extends Application {
             // Show the scene containing the root layout.
             Scene scene = new Scene(rootLayout);
             primaryStage.setScene(scene);
+
+            // Give the controller access to the main app.
+            rootController = loader.getController();
+            rootController.setMainApp(this);
+
             primaryStage.show();
+            
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
+    
     // Shows the LibraryMember overview inside the root layout.
     public void showLibraryMemberOverview() {
         try {
@@ -86,7 +162,47 @@ public class MainApp extends Application {
         }
     }
     
-	/**
+    // Shows the LibraryMember overview inside the root layout.
+    public void showBookOverview() {
+        try {
+            // Load person overview.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("view/BookOverview.fxml"));
+            AnchorPane bookOverview = (AnchorPane) loader.load();
+            
+            // Set person overview into the center of root layout.
+            rootLayout.setCenter(bookOverview);
+
+            // Give the controller access to the main app.
+            BookOverviewController controller = loader.getController();
+            controller.setMainApp(this);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    // Shows the LibraryMember overview inside the root layout.
+    public void showCheckoutBook() {
+        try {
+            // Load person overview.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("view/CheckoutBook.fxml"));
+            AnchorPane checkoutBook = (AnchorPane) loader.load();
+            
+            // Set person overview into the center of root layout.
+            rootLayout.setCenter(checkoutBook);
+
+            // Give the controller access to the main app.
+            // CheckoutBookController checkoutBook = loader.getController();
+            // checkoutBook.setMainApp(this);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
 	 * Returns the main stage.
 	 * @return
 	 */
@@ -134,5 +250,68 @@ public class MainApp extends Application {
             e.printStackTrace();
             return false;
         }
-    }    
+    }
+    
+    public boolean showBookEditDialog(Book book) {
+        try {
+            // Load the fxml file and create a new stage for the popup dialog.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("view/BookEditDialog.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+
+            // Create the dialog Stage.
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Edit Book");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(primaryStage);
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+
+            // Set the book into the controller.
+            BookEditDialogController controller = loader.getController();
+            controller.setDialogStage(dialogStage);
+            controller.setBook(book);
+
+            // Show the dialog and wait until the user closes it
+            dialogStage.showAndWait();
+
+            return controller.isOkClicked();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    // Show Login Dialog
+    public boolean showLoginDialog() {
+        try {
+            // Load the fxml file and create a new stage for the popup dialog.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("view/LoginDialog.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+
+            // Create the dialog Stage.
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Login");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(primaryStage);
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+
+            // Set the User into the controller.
+            LoginDialogController controller = loader.getController();
+            controller.setDialogStage(dialogStage);
+            controller.setMainApp(this);
+
+            // Show the dialog and wait until the user closes it
+            dialogStage.showAndWait();
+
+            return controller.isOkClicked();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+        
+        
 }
