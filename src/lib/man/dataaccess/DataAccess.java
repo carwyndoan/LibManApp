@@ -23,7 +23,7 @@ public interface DataAccess {
 
 	public LibraryMember findLibraryMemberById(String id);
 
-	public List<LibraryMember> findAllMembers();
+	public Collection<LibraryMember> findAllMembers();
 	
 	//CheckoutRecord function
 	public void checkout(CheckoutRecord checkoutRecord);

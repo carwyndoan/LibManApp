@@ -67,9 +67,10 @@ public class DataAccessFacade implements DataAccess {
 	}
 
 	@Override
-	public List<LibraryMember> findAllMembers() {
+	public Collection<LibraryMember> findAllMembers() {
 		// TODO Auto-generated method stub
-		return null;
+		HashMap<Long, LibraryMember> libMap = (HashMap<Long, LibraryMember>) readDataFromFile(libraryMembers, LibraryMember.STORAGE_TYPE);
+		return libMap.values();
 	}
 
 	@Override

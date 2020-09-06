@@ -3,6 +3,7 @@ package lib.man.model;
 public class LibraryMember extends Person {
 	
 	private static final long serialVersionUID = -7206984963573838605L;
+	public static final String STORAGE_TYPE = "LIBRARYMEMBER";
 	private long memberId;
 	private CheckoutRecord checkoutRecord;
 	
