@@ -4,10 +4,17 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import lib.man.MainApp;
 
 
 public class LoginDialogController {
-
+    // Reference to the main application
+    private MainApp mainApp;
+    // Is called by the main application to give a reference back to itself.
+    public void setMainApp(MainApp mainApp) {
+        this.mainApp = mainApp;
+    }
+    
     @FXML
     private TextField txtUserName;
     @FXML
@@ -45,9 +52,17 @@ public class LoginDialogController {
     @FXML
     private void handleOk() {
         if (isInputValid()) {
-        	userName = txtUserName.getText();
+        	userName = txtUserName.getText().trim();
             password = txtPassword.getText();
-
+            // Update return value
+            if (userName.compareToIgnoreCase("librarian") == 0)
+            	mainApp.setSystemRoles(1); 
+            else if (userName.compareToIgnoreCase("admin") == 0)
+            	mainApp.setSystemRoles(2); 
+            else if (  userName.compareToIgnoreCase("adminlib") == 0 
+            		|| userName.compareToIgnoreCase("libadmin") == 0)
+            	mainApp.setSystemRoles(3); 
+            	
             okClicked = true;
             dialogStage.close();
         }

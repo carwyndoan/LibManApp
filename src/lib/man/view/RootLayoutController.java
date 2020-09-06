@@ -4,7 +4,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
 import lib.man.MainApp;
 
 public class RootLayoutController {
@@ -25,8 +24,6 @@ public class RootLayoutController {
     private void handleFileLogin() {
     	if (mainApp.showLoginDialog() == true)	
     	{
-        	// Get User Role ------ Here
-    		mainApp.setSystemRoles(3);
     		// Load SystemRoles
     		LoadSystemRoles(mainApp.getSystemRoles());
     	}

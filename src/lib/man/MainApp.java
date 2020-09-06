@@ -61,10 +61,9 @@ public class MainApp extends Application {
     		String strIsbn 	= String.format("%010d", i);
     		String strAuthor = String.format("Author %d", i);
     		String strTitle = String.format("Title %d", i);
-    		String strMaxCheckout = String.format("%d", i);    		
-    		listBook.add(new Book(strIsbn, strAuthor, strTitle, i));
+    		int 	maxCheckout = i + 5;    		
+    		listBook.add(new Book(strIsbn, strAuthor, strTitle, maxCheckout));
     	}
-    
     }
     
     // Returns the data as an observable list of LibraryMembers. 
@@ -87,8 +86,6 @@ public class MainApp extends Application {
         // Show Login Dlg
         if (showLoginDialog() == true)
     	{
-        	// ---- Get role here
-        	systemRoles = 3;
         	// Load Roles
         	rootController.LoadSystemRoles(systemRoles);
     	}
@@ -255,9 +252,10 @@ public class MainApp extends Application {
             Scene scene = new Scene(page);
             dialogStage.setScene(scene);
 
-            // Set the person into the controller.
+            // Set the User into the controller.
             LoginDialogController controller = loader.getController();
             controller.setDialogStage(dialogStage);
+            controller.setMainApp(this);
 
             // Show the dialog and wait until the user closes it
             dialogStage.showAndWait();
